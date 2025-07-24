@@ -25,7 +25,6 @@ end
 local function get_local_variable_declaration_node_at_cursor()
   local node = ts_utils.get_node_at_cursor()
   if node == nil then
-    error('No treesitter parser found.')
     return
   end
   local start_row = node:start()
