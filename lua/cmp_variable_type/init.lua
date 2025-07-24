@@ -26,7 +26,7 @@ function source:_get_completion_response()
   end
 end
 
----@return string|nil type_identifier_text
+---@return string|nil type_identifier_text Example: 'LinkedHashSet'
 function source:_get_type_identifier_text_at_cursor()
   local local_variable_declaration_node = source:_get_local_variable_declaration_node_at_cursor()
   if local_variable_declaration_node == nil then
@@ -54,7 +54,7 @@ function source:_get_local_variable_declaration_node_at_cursor()
   return node
 end
 
----@param type_identifier_text string
+---@param type_identifier_text string Example: 'LinkedHashSet'
 ---@return lsp.CompletionItem[]
 function source:_get_completion_items(type_identifier_text)
   local completions = {}
