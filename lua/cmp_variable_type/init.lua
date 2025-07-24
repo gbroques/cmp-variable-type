@@ -5,7 +5,7 @@ local source = {}
 
 ---Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
 ---@param str string
----@return table
+---@return table words A table containing elements for each uppercase word.
 local function split_pascal_case(str)
   -- Insert a space before each uppercase letter (except the first)
   local spaced_str = str:gsub("(%l)(%u)", "%1 %2")
