@@ -31,7 +31,7 @@ Doesn't work for Java generic types. For example:
 LinkedHashSet<String> l // doesn't suggest linkedHashSet
 ```
 
-This is due to the tree-sitter Java grammar parsing incomplete generic type declarations as binary expressions.
+This is due to the Java tree-sitter grammar parsing incomplete generic type declarations as binary expressions.
 
-Changes to the Java tree-sitter grammar should be made before attempting to work around that.
+Changes to the [Java tree-sitter grammar](https://github.com/tree-sitter/tree-sitter-java) should be made before attempting to work around that.
 
