@@ -3,10 +3,6 @@ local ts_utils = require('nvim-treesitter.ts_utils')
 
 local source = {}
 
--- References:
--- * Let's create a Neovim plugin using Treesitter and Lua https://www.youtube.com/watch?v=dPQfsASHNkg
--- * How to create a custom completion source https://www.youtube.com/watch?v=sr8XZ3AsSAM
-
 ---Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
 ---@param str string
 ---@return table
