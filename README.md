@@ -19,6 +19,20 @@ LinkedHashSet s // suggest set
 
 Other editors such as VS Code also provide these completion suggestions.
 
+## Installation
+
+If you use [lazy.nvim](https://github.com/folke/lazy.nvim) as your plugin manager:
+```lua
+{
+  'gbroques/cmp-variable-type',
+  dependencies = {
+    'hrsh7th/nvim-cmp',
+    'nvim-treesitter/nvim-treesitter'
+  },
+  ft = 'java'
+}
+```
+
 ## Setup
 
 ```lua
