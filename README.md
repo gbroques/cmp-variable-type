@@ -122,13 +122,21 @@ It should complete variables in the following places.
 Pull requests are welcome for other languages like C#, Kotlin, and Scala.
 
 ## Limitations
-Doesn't work for Java generic types. For example:
-```java
-LinkedHashSet<String> l
-                      ^ doesn't suggest linkedHashSet
-```
+1. Doesn't work for Java generic types. For example:
+   ```java
+   LinkedHashSet<String> l
+                         ^ doesn't suggest linkedHashSet
+   ```
 
-This is because the Java tree-sitter grammar parses incomplete generic type declarations as binary expressions.
+   This is because the Java tree-sitter grammar parses incomplete generic type declarations as binary expressions.
 
-Changes to the [Java tree-sitter grammar](https://github.com/tree-sitter/tree-sitter-java) should be made before attempting to work around that.
+   Changes to the [Java tree-sitter grammar](https://github.com/tree-sitter/tree-sitter-java) should be made before attempting to work around that.
+
+2. Currently doesn't work for constants. For example:
+   ```java
+   class Example {
+       private static final Logger L
+                                   ^ doesn't suggest LOGGER
+   }
+   ```
 
