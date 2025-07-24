@@ -105,4 +105,4 @@ function source:complete(params, callback)
   callback(get_completion_response())
 end
 
-cmp.register_source('variable_type', source)
+return source
