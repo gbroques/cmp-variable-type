@@ -75,7 +75,7 @@ LinkedHashSet<String> l
                       ^ doesn't suggest linkedHashSet
 ```
 
-This is due to the Java tree-sitter grammar parsing incomplete generic type declarations as binary expressions.
+This is because the Java tree-sitter grammar parses incomplete generic type declarations as binary expressions.
 
 Changes to the [Java tree-sitter grammar](https://github.com/tree-sitter/tree-sitter-java) should be made before attempting to work around that.
 
