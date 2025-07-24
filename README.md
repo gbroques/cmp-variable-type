@@ -1,6 +1,6 @@
 # cmp-variable-type
 
-Tree-sitter based nvim-cmp completion source for lowerCamelCase variable names based on type.
+Tree-sitter based [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) completion source for lowerCamelCase variable names based on type.
 
 **Motivation:** It's common to name variables after their type in strongly-typed languages such as Java.
 
