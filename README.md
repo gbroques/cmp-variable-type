@@ -23,6 +23,45 @@ Other editors such as VS Code also provide these completion suggestions.
 
 Currently only supports Java. See [test/Test.java](./test/Test.java) for testing.
 
+It should complete variables in the following places.
+
+1. For fields declarations in class bodies:
+```java
+class Example {
+    private final CompletableFuture f // suggest future
+}
+```
+
+
+2. For parameter names in constructors:
+```java
+class Example {
+
+    Example(CompletableFuture f) // suggest future
+
+}
+```
+
+3. For parameter names in method declarations:
+```java
+class Example {
+
+    private String getValue(CompletableFuture f) // suggest future
+
+}
+```
+
+4. And for local variable names in method bodies:
+```java
+class Example {
+
+    private String getValue() {
+        CompletableFuture f // suggest future
+    }
+
+}
+```
+
 Pull requests are welcome for other languages like C#, Kotlin, and Scala.
 
 ## Limitations
