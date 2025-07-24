@@ -28,6 +28,7 @@ It should complete variables in the following places.
 1. For fields declarations in class bodies:
    ```java
    class Example {
+
        private final CompletableFuture f
                                        ^ suggest future
    }
