@@ -71,9 +71,9 @@ function source:_get_completion_items(type_identifier_text)
   return completions
 end
 
----Returns { 'linkedHashSet', 'hashSet', 'set' } for 'LinkedHashSet'
 ---@param type_identifier_text string
 ---@return function
+---@usage source:_suggestion('LinkedHashSet') -- { 'linkedHashSet', 'hashSet', 'set' }
 function source:_suggestion(type_identifier_text)
   local words = source:_split_pascal_case(type_identifier_text)
   local i = 0
@@ -91,9 +91,9 @@ function source:_suggestion(type_identifier_text)
   end
 end
 
----Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
 ---@param str string
 ---@return table words A table containing elements for each uppercase word.
+---@usage source:_split_pascal_case('LinkedHashSet') -- { 'Linked', 'Hash', 'Set' }
 function source:_split_pascal_case(str)
   -- Insert a space before each uppercase letter (except the first)
   local spaced_str = str:gsub("(%l)(%u)", "%1 %2")
