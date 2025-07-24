@@ -47,7 +47,7 @@ require('cmp').setup({
 
 The `type` is returned within the `data` element of the `completion_item` for each `entry`.
 
-If you want to [customize the menu appearance](https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations) to show the type as the source:
+If you want to [customize the menu appearance](https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations) to show the type as the source, then you might have the following code:
 
 ```lua
 local cmp = require('cmp')
