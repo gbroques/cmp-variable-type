@@ -58,10 +58,10 @@ cmp.setup {
       vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       -- Source
       local data = entry.completion_item.data
-      local type = data ~= nil and data.type or 'Type'
+      local variable_type = data ~= nil and data.type or 'Type'
       vim_item.menu = ({
         -- 👇 Show type (e.g. LinkedHashSet) as source in completion menu.
-        variable_type = type,
+        variable_type = variable_type,
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
