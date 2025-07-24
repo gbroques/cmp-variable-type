@@ -3,7 +3,7 @@
 > [!WARNING]
 > Currently experimental until v1.0.0 release.
 
-Tree-sitter based [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) completion source for lowerCamelCase variable names based on type.
+[Tree-sitter](https://github.com/tree-sitter/tree-sitter) based [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) completion source for lowerCamelCase variable names based on type.
 
 ## Motivation
 
