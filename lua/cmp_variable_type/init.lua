@@ -3,36 +3,31 @@ local ts_utils = require('nvim-treesitter.ts_utils')
 
 local source = {}
 
----Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
----@param str string
----@return table words A table containing elements for each uppercase word.
-local function split_pascal_case(str)
-  -- Insert a space before each uppercase letter (except the first)
-  local spaced_str = str:gsub("(%l)(%u)", "%1 %2")
-  -- Split the string by spaces
-  local components = {}
-  for word in spaced_str:gmatch("%S+") do -- Use %S+ to match one or more non-whitespace characters
-    table.insert(components, word)
-  end
-  return components
+---Invoke completion.
+---@param params cmp.SourceCompletionApiParams
+---@param callback fun(response: lsp.CompletionResponse|nil)
+function source:complete(params, callback)
+  callback(source:_get_completion_response())
 end
 
----@return TSNode|nil
-local function get_local_variable_declaration_node_at_cursor()
-  local node = ts_utils.get_node_at_cursor()
-  if node == nil then
-    return
+---@return string
+function source:get_debug_name()
+  return 'variable_type'
+end
+
+---@return lsp.CompletionResponse
+function source:_get_completion_response()
+  local type_identifier_text = source:_get_type_identifier_text_at_cursor()
+  if type_identifier_text ~= nil then
+    return source:_get_completion_items(type_identifier_text)
+  else
+    return {}
   end
-  local start_row = node:start()
-  while (node ~= nil and node:type() ~= 'local_variable_declaration' and node:start() == start_row) do
-    node = node:parent()
-  end
-  return node
 end
 
 ---@return string|nil type_identifier_text
-local function get_type_identifier_text_at_cursor()
-  local local_variable_declaration_node = get_local_variable_declaration_node_at_cursor()
+function source:_get_type_identifier_text_at_cursor()
+  local local_variable_declaration_node = source:_get_local_variable_declaration_node_at_cursor()
   if local_variable_declaration_node == nil then
     return nil
   end
@@ -45,11 +40,41 @@ local function get_type_identifier_text_at_cursor()
   return vim.treesitter.get_node_text(first_child, bufnr)
 end
 
+---@return TSNode|nil
+function source:_get_local_variable_declaration_node_at_cursor()
+  local node = ts_utils.get_node_at_cursor()
+  if node == nil then
+    return
+  end
+  local start_row = node:start()
+  while (node ~= nil and node:type() ~= 'local_variable_declaration' and node:start() == start_row) do
+    node = node:parent()
+  end
+  return node
+end
+
+---@param type_identifier_text string
+---@return lsp.CompletionItem[]
+function source:_get_completion_items(type_identifier_text)
+  local completions = {}
+  for label in source:_suggestion(type_identifier_text) do
+    table.insert(completions, {
+      label = label,
+      kind = cmp.lsp.CompletionItemKind.Variable,
+      data = {
+        -- Useful for displaying type as a source in completion menu.
+        type = type_identifier_text
+      }
+    })
+  end
+  return completions
+end
+
 ---Returns { 'linkedHashSet', 'hashSet', 'set' } for 'LinkedHashSet'
 ---@param type_identifier_text string
 ---@return function
-local function suggestion(type_identifier_text)
-  local words = split_pascal_case(type_identifier_text)
+function source:_suggestion(type_identifier_text)
+  local words = source:_split_pascal_case(type_identifier_text)
   local i = 0
   return function()
     i = i + 1
@@ -65,43 +90,18 @@ local function suggestion(type_identifier_text)
   end
 end
 
----@param type_identifier_text string
----@return lsp.CompletionItem[]
-local function get_completion_items(type_identifier_text)
-  local completions = {}
-  for label in suggestion(type_identifier_text) do
-    table.insert(completions, {
-      label = label,
-      kind = cmp.lsp.CompletionItemKind.Variable,
-      data = {
-        -- Useful for displaying type as a source in completion menu.
-        type = type_identifier_text
-      }
-    })
+---Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
+---@param str string
+---@return table words A table containing elements for each uppercase word.
+function source:_split_pascal_case(str)
+  -- Insert a space before each uppercase letter (except the first)
+  local spaced_str = str:gsub("(%l)(%u)", "%1 %2")
+  -- Split the string by spaces
+  local components = {}
+  for word in spaced_str:gmatch("%S+") do -- Use %S+ to match one or more non-whitespace characters
+    table.insert(components, word)
   end
-  return completions
-end
-
----@return lsp.CompletionResponse
-local function get_completion_response()
-  local type_identifier_text = get_type_identifier_text_at_cursor()
-  if type_identifier_text ~= nil then
-    return get_completion_items(type_identifier_text)
-  else
-    return {}
-  end
-end
-
----@return string
-function source:get_debug_name()
-  return 'variable_type'
-end
-
----Invoke completion.
----@param params cmp.SourceCompletionApiParams
----@param callback fun(response: lsp.CompletionResponse|nil)
-function source:complete(params, callback)
-  callback(get_completion_response())
+  return components
 end
 
 return source
