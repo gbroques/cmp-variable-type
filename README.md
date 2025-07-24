@@ -19,6 +19,16 @@ LinkedHashSet s // suggest set
 
 Other editors such as VS Code also provide these completion suggestions.
 
+## Setup
+
+```lua
+require('cmp').setup({
+  sources = {
+    { name = 'variable_type' },
+  },
+})
+```
+
 ## Supported Languages
 
 Currently only supports Java. See [test/Test.java](./test/Test.java) for testing.
