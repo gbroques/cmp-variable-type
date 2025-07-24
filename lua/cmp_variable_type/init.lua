@@ -1,12 +1,13 @@
-local ts_utils = require('nvim-treesitter.ts_utils')
 local cmp = require('cmp')
+local ts_utils = require('nvim-treesitter.ts_utils')
+
 local source = {}
 
 -- References:
 -- * Let's create a Neovim plugin using Treesitter and Lua https://www.youtube.com/watch?v=dPQfsASHNkg
 -- * How to create a custom completion source https://www.youtube.com/watch?v=sr8XZ3AsSAM
 
---- Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
+---Returns { 'Linked', 'Hash', 'Set' } for 'LinkedHashSet'.
 ---@param str string
 ---@return table
 local function split_pascal_case(str)
@@ -49,7 +50,7 @@ local function get_type_identifier_text_at_cursor()
   return vim.treesitter.get_node_text(first_child, bufnr)
 end
 
---- Returns { 'linkedHashSet', 'hashSet', 'set' } for 'LinkedHashSet'
+---Returns { 'linkedHashSet', 'hashSet', 'set' } for 'LinkedHashSet'
 ---@param type_identifier_text string
 ---@return function
 local function suggestion(type_identifier_text)
@@ -96,13 +97,12 @@ local function get_completion_response()
   end
 end
 
----Return the debug name of this source.
 ---@return string
 function source:get_debug_name()
   return 'variable_type'
 end
 
----Invoke completion (required).
+---Invoke completion.
 ---@param params cmp.SourceCompletionApiParams
 ---@param callback fun(response: lsp.CompletionResponse|nil)
 function source:complete(params, callback)
