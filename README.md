@@ -12,9 +12,9 @@ It's common to name variables after their type in strongly-typed languages such 
 For example, a variable name with the type `LinkedHashSet` could be `linkedHashSet`, `hashSet`, or `set`:
 
 ```java
-LinkedHashSet l // suggests linkedHashSet
-LinkedHashSet h // suggests hashSet
-LinkedHashSet s // suggests set
+LinkedHashSet l // suggest linkedHashSet
+LinkedHashSet h // suggest hashSet
+LinkedHashSet s // suggest set
 ```
 
 Other editors such as VS Code also provide these completion suggestions.
