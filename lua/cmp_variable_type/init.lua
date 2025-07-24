@@ -1,6 +1,7 @@
 local cmp = require('cmp')
 local ts_utils = require('nvim-treesitter.ts_utils')
 
+-- For creating a custom nvim-cmp completion source see :help cmp-develop.
 local source = {}
 
 ---Invoke completion.
