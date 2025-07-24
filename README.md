@@ -26,48 +26,52 @@ Currently only supports Java. See [test/Test.java](./test/Test.java) for testing
 It should complete variables in the following places.
 
 1. For fields declarations in class bodies:
-```java
-class Example {
-    private final CompletableFuture f // suggest future
-}
-```
-
+   ```java
+   class Example {
+       private final CompletableFuture f
+                                       ^ suggest future
+   }
+   ```
 
 2. For parameter names in constructors:
-```java
-class Example {
+   ```java
+   class Example {
 
-    Example(CompletableFuture f) // suggest future
+       Example(CompletableFuture f)
+                                 ^ suggest future
 
-}
-```
+   }
+   ```
 
 3. For parameter names in method declarations:
-```java
-class Example {
+   ```java
+   class Example {
 
-    private String getValue(CompletableFuture f) // suggest future
+       private String getValue(CompletableFuture f)
+                                                 ^ suggest future
 
-}
-```
+   }
+   ```
 
 4. And for local variable names in method bodies:
-```java
-class Example {
+   ```java
+   class Example {
 
-    private String getValue() {
-        CompletableFuture f // suggest future
-    }
+       private String getValue() {
+           CompletableFuture f
+                             ^ suggest future
+       }
 
-}
-```
+   }
+   ```
 
 Pull requests are welcome for other languages like C#, Kotlin, and Scala.
 
 ## Limitations
 Doesn't work for Java generic types. For example:
 ```java
-LinkedHashSet<String> l // doesn't suggest linkedHashSet
+LinkedHashSet<String> l
+                      ^ doesn't suggest linkedHashSet
 ```
 
 This is due to the Java tree-sitter grammar parsing incomplete generic type declarations as binary expressions.
