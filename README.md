@@ -5,7 +5,9 @@
 
 Tree-sitter based [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) completion source for lowerCamelCase variable names based on type.
 
-**Motivation:** It's common to name variables after their type in strongly-typed languages such as Java.
+## Motivation
+
+It's common to name variables after their type in strongly-typed languages such as Java.
 
 For example, a variable name with the type `LinkedHashSet` could be `linkedHashSet`, `hashSet`, or `set`:
 
