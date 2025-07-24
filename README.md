@@ -58,7 +58,7 @@ cmp.setup {
       vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       -- Source
       vim_item.menu = ({
-        -- Show LinkedHashSet or CompletableFuture as source in completion menu.
+        -- Show type (e.g. LinkedHashSet) as source in completion menu.
         variable_type = entry.completion_item.data ~= nil and entry.completion_item.data.type or 'Var'
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
