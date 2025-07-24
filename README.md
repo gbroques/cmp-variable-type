@@ -95,7 +95,6 @@ It should complete variables in the following places.
 
        Example(CompletableFuture f)
                                  ^ suggest future
-
    }
    ```
 
@@ -105,7 +104,6 @@ It should complete variables in the following places.
 
        private String getValue(CompletableFuture f)
                                                  ^ suggest future
-
    }
    ```
 
@@ -115,8 +113,7 @@ It should complete variables in the following places.
 
        private String getValue() {
            CompletableFuture f
-                             ^ suggest future
-       }
+       }                     ^ suggest future
 
    }
    ```
@@ -137,6 +134,7 @@ Pull requests are welcome for other languages like C#, Kotlin, and Scala.
 2. Currently doesn't work for constants. For example:
    ```java
    class Example {
+
        private static final Logger L
                                    ^ doesn't suggest LOGGER
    }
