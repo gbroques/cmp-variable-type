@@ -29,6 +29,35 @@ require('cmp').setup({
 })
 ```
 
+## Configuration
+
+The `type` is returned within the `data` element of the `completion_item` for each `entry`.
+
+If you want to [customize the menu appearance](https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#basic-customisations) to show the type as the source:
+
+```lua
+local cmp = require('cmp')
+cmp.setup {
+  formatting = {
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      -- Source
+      vim_item.menu = ({
+        -- Show LinkedHashSet or CompletableFuture as source in completion menu.
+        variable_type = entry.completion_item.data ~= nil and entry.completion_item.data.type or 'Var'
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+        latex_symbols = "[LaTeX]",
+      })[entry.source.name]
+      return vim_item
+    end
+  },
+}
+```
+
 ## Supported Languages
 
 Currently only supports Java. See [test/Test.java](./test/Test.java) for testing.

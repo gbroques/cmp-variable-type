@@ -76,7 +76,11 @@ local function get_completion_items(type_identifier_text)
   for label in suggestion(type_identifier_text) do
     table.insert(completions, {
       label = label,
-      kind = cmp.lsp.CompletionItemKind.Variable
+      kind = cmp.lsp.CompletionItemKind.Variable,
+      data = {
+        -- Useful for displaying type as a source in completion menu.
+        type = type_identifier_text
+      }
     })
   end
   return completions
